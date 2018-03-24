@@ -409,8 +409,6 @@ else
     C = fliplr(xcorr(fliplr(ECG_SIG), fliplr(ECG_template)));
     C = C((post_R+1):(Nsamp+post_R)) ./ sqrt(mvv((post_R+2):end));
     
-    C = abs(C);
-    
     ref_ibi = floor(ref_ibi); CP = 1;
     for p=1:numel(beat)
         wbeg = max(CP + pre_R, beat(p)-ref_ibi);

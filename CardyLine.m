@@ -87,7 +87,7 @@ IBI(outlier) = nan;
 %% Analyze HRV per epoch
 ebeg = 1:hrv_analysis_period:Nsamp;
 ibeg = arrayfun(@(x)min([(numel(HEARTBEAT_SEQ)+1), find(HEARTBEAT_SEQ >= x, 1,'first')]), ebeg);
-iend = arrayfun(@(x)max([1, find(HEARTBEAT_SEQ < (x+hrv_analysis_period), 1,'last')]), ebeg);
+iend = arrayfun(@(x)max([0, find(HEARTBEAT_SEQ < (x+hrv_analysis_period), 1,'last')]), ebeg);
 
 hrv_feat = struct2table(arrayfun(@(bi,ei)extract_hrv_features( ...
     HEARTBEAT_SEQ(bi:ei)*(1000/Fs), ...
