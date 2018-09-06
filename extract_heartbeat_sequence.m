@@ -379,7 +379,7 @@ maybe_beat( oibi & (([false odibi] & [odibi false]) | (ibi < crit_ibi)) ) = [];
 %% Make ECG template
 beat = beat(ismember(beat, maybe_beat));
 
-pre_R = min([round(0.2*Fs), (max(beat)-1)]); post_R = min([round(min(0.6*Fs, ref_ibi-0.1*Fs)), (Nsamp-min(beat))]);
+pre_R = min([round(0.05*Fs), (max(beat)-1)]); post_R = min([round(min(0.15*Fs, ref_ibi-0.1*Fs)), (Nsamp-min(beat))]);
 beat = beat((beat > pre_R) & ((beat+post_R) <= Nsamp));
 
 Ntemplate = pre_R + post_R + 1;
