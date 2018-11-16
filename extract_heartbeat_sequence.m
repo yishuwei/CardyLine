@@ -409,14 +409,14 @@ else
     C = fliplr(xcorr(fliplr(ECG_SIG), fliplr(ECG_template)));
     C = C((post_R+1):(Nsamp+post_R)) ./ sqrt(mvv((post_R+2):end));
     
-    ref_ibi = floor(ref_ibi); CP = 1;
+    w = floor(0.3*ref_ibi); CP = 1;
     for p=1:numel(beat)
-        wbeg = max(CP + pre_R, beat(p)-ref_ibi);
+        wbeg = max(CP + pre_R, beat(p)-w);
         
         if p < numel(beat)
-            wend = min(beat(p)+ref_ibi, beat(p+1)-pre_R);
+            wend = min(beat(p)+w, beat(p+1)-pre_R);
         else
-            wend = min(beat(p)+ref_ibi, Nsamp-post_R);
+            wend = min(beat(p)+w, Nsamp-post_R);
         end
         
         [~,CP] = max([nan C(wbeg:wend)]); CP = CP + wbeg - 1;
